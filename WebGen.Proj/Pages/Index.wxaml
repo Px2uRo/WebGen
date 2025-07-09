@@ -1,0 +1,5 @@
+﻿<Grid RowDefinitions="300px, 2*" ColumnDefinitions="1*, 3*">
+    <Button Grid.Row="0" Click="ShowMessage" Grid.Column="1" Content="Click Me" />
+    <Button Grid.Row="0" Click="ShowMessage" Grid.Column="1" Content="Click Me" />
+    <TextBlock Grid.Row="1" Grid.Column="0" Text="Hello World!" />
+</Grid>
