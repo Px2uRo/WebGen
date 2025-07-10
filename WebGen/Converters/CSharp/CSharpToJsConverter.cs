@@ -64,18 +64,34 @@ public class CSharpToJsConverter
             ? "/* 方法体为空 */"
             : string.Join(" ", body.Statements.Select(ConvertStatement));
     }
-
+    #region ConvertStatement
     private string ConvertStatement(StatementSyntax statement)
     {
         if (statement is ExpressionStatementSyntax expression)
         {
             return ConvertExpression(expression.Expression) + ";";
         }
-        else if(statement is LocalDeclarationStatementSyntax declaration)
+        else if (statement is LocalDeclarationStatementSyntax declaration)
         {
-
+            return ConvertDeclaration(declaration);
         }
         return $"/* 未实现的陈述 (statement) 分析: {statement} */";
+    }
+
+    private string ConvertDeclaration(LocalDeclarationStatementSyntax declaration)
+    {
+        var variableName = declaration.Declaration.Variables.FirstOrDefault()?.Identifier.Text;
+        if (variableName == null)
+        {
+            return "/* 无效的变量声明 */";
+        }
+        var initializer = declaration.Declaration.Variables.FirstOrDefault()?.Initializer?.Value;
+        if (initializer != null)
+        {
+            var value = ConvertExpression(initializer);
+            return $"let {variableName} = {value};";
+        }
+        return $"let {variableName};"; // 没有初始化值
     }
 
     private string ConvertExpression(ExpressionSyntax expression)
@@ -94,13 +110,15 @@ public class CSharpToJsConverter
         return expression.ToString();
     }
 
+    #endregion
+
     private string? ConvertInvocation(InvocationExpressionSyntax invocation)
     {
         var methodName = invocation.Expression.ToString();
         
         if(invocation.Expression is MemberAccessExpressionSyntax memberAccess)
         {
-            methodName = memberAccess.Name.Contains("");
+            //methodName = memberAccess.Name.Contains("");
         }
 
         //if (methodName.Contains(JSGlobalFunctions.Alert()))

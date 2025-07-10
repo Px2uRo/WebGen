@@ -22,7 +22,7 @@ namespace WebGen.XmlUtil
                 var name1 = attribute.Name.ToString()[..(attribute.Name.ToString().IndexOf('.'))];
                 if (factory.Converters.TryGetValue(name1, out var dpc))
                 {
-                    if (dpc is IDependencyPropertyConverter c)
+                    if (dpc is DependencyPropertyConverter c)
                     {
                         c.HandleAfterAdded(xamlElement, html);
                         var atrs = xamlElement.Attributes().Where(x => x.Name.ToString().StartsWith(name1)).ToList();

@@ -8,9 +8,9 @@ using System.Xml.Linq;
 using WebGen.Core;
 using WebGen.XmlUtil;
 
-namespace WebGen.Converters
+namespace WebGen.Converters.Xaml
 {
-    public class GridConverter : XamlElementConverter, IDependencyPropertyConverter
+    public class GridConverter : XamlElementConverter, DependencyPropertyConverter
     {
 
         public GridConverter(XamlElementConverterFactory factory):base(factory) { }

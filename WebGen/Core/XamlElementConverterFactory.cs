@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using WebGen.Converters;
+using WebGen.Converters.Xaml;
 using WebGen.XmlUtil;
 
 namespace WebGen.Core

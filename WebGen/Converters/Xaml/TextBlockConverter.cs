@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using WebGen.Core;
 
-namespace WebGen.Converters
+namespace WebGen.Converters.Xaml
 {
     internal class TextBlockConverter : XamlElementConverter
     {
