@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebGen.QuickIO
+namespace WebGen.Utils.QuickIO
 {
     public static class HTMLUtil
     {
@@ -25,7 +25,7 @@ namespace WebGen.QuickIO
 
         private static void Save(string targetFile, string content)
         {
-            System.IO.File.WriteAllText(targetFile, content);
+            File.WriteAllText(targetFile, content);
         }
     }
 }

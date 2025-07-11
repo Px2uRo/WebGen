@@ -19,9 +19,12 @@
     <ProjectReference Include="..\WebGen\WebGen.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\Index.wxaml" />
-    <EmbeddedResource Include="Pages\Index.wxaml.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Pages\Index.wxaml" />
+		<EmbeddedResource Include="Pages\Index.wxaml.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile  Include="Pages\Index.wxaml.cs" />
+	</ItemGroup>
 
 </Project>

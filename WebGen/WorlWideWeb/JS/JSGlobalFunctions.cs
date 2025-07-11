@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebGen.JS
+namespace WebGen.WorlWideWeb.JS
 {
     /// <summary>
     /// 目前只有一些简单的 JS 方法，主要是为了方便在 WebGen 中使用 JavaScript 进行交互，调试的内容以后再学习吧。
@@ -139,7 +139,7 @@ namespace WebGen.JS
                 index++;
             }
 
-            return negative ? (int)(-result) : (int)result;
+            return negative ? (int)-result : (int)result;
         }
         /// <summary>
         /// 由 ChatGPT 生成的 _isNaN 方法，主要是为了将字符串转换为整数。由 ChatGPT 生成的 _parseFloat 方法，主要是为了将字符串转换为整数。
@@ -186,12 +186,12 @@ namespace WebGen.JS
         {
             if (s == null) return null;
 
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             foreach (char c in s)
             {
-                if ((c >= 'A' && c <= 'Z') ||
-                    (c >= 'a' && c <= 'z') ||
-                    (c >= '0' && c <= '9') ||
+                if (c >= 'A' && c <= 'Z' ||
+                    c >= 'a' && c <= 'z' ||
+                    c >= '0' && c <= '9' ||
                     "-_.!~*'()".IndexOf(c) != -1)
                 {
                     sb.Append(c);

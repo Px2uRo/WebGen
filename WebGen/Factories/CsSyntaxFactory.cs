@@ -15,6 +15,7 @@ namespace WebGen.Core
 
     public class CSSyntaxConverterFactory
     {
+        internal SyntaxTree Tree { get; set; }
         public readonly Dictionary<Type, CSSyntaxConverter> Converters = new();
         public void Register(Type syntaxType, CSSyntaxConverter converter)
         {
@@ -40,16 +41,18 @@ namespace WebGen.Core
         internal string Convert(string csharpCode)
         {
             var tree = CSharpSyntaxTree.ParseText(csharpCode);
-            var root = tree.GetRoot() as CompilationUnitSyntax;
+            var rt = tree.GetRoot() as CompilationUnitSyntax;
 
-            if (root == null)
+            if (rt == null)
             {
                 throw new InvalidOperationException("无法解析代码：输入的 C# 代码不完整或无效。");
             }
-
-            return ProcessClasses(root);
+            Tree = tree;
+            var res = ProcessCodes(rt);
+            Tree = null; 
+            return res;
         }
-        private string ProcessClasses(CompilationUnitSyntax root)
+        private string ProcessCodes(CompilationUnitSyntax root)
         {
             // 遍历所有类，找到方法。
             var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
@@ -89,12 +92,16 @@ namespace WebGen.Core
                 }
                 catch (Exception op)
                 {
+                    if(op is KeyNotFoundException key)
+                    {
+                        return $"/*转换错误:{statement.ToString()}，发生了{op.GetType().Name}（{op}）*/\n/*可能是因为没有注册转换器:{key.Message}*/\n";
+                    }
                     return $"/*转换错误:{statement.ToString()}，发生了{op.GetType().Name}（{op}）*/\n";
                 }
             }
             else
             {
-                return $"/*转换未实现:{statement.ToString()}({statement.GetType()})*/\n";
+                return $"/*转换未实现:{statement.ToString()}({statement.GetType()})不包含在注册了的工厂的转换器内*/\n";
             }
         }
 

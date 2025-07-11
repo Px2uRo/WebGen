@@ -8,7 +8,7 @@ using System.Xml.Linq;
 using WebGen.Converters;
 using WebGen.Core;
 
-namespace WebGen.XmlUtil
+namespace WebGen.Utils.XmlUtil
 {
     internal static class TreeUtil
     {
@@ -19,7 +19,7 @@ namespace WebGen.XmlUtil
             for (int i = 0; i < attributes.Count; i++)
             {
                 var attribute = attributes.ToList()[i];
-                var name1 = attribute.Name.ToString()[..(attribute.Name.ToString().IndexOf('.'))];
+                var name1 = attribute.Name.ToString()[..attribute.Name.ToString().IndexOf('.')];
                 if (factory.Converters.TryGetValue(name1, out var dpc))
                 {
                     if (dpc is DependencyPropertyConverter c)

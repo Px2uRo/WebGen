@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Html\" />
-    <Folder Include="CSS\" />
+    <Folder Include="WorlWideWeb\Html\" />
+    <Folder Include="WorlWideWeb\CSS\" />
   </ItemGroup>
 
 </Project>

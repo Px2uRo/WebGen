@@ -1,6 +1,6 @@
 ﻿using WebGen.Converters;
-using WebGen.QuickIO;
 using WebGen.PlatformConverters;
+using WebGen.Utils.QuickIO;
 
 namespace WebGen
 {

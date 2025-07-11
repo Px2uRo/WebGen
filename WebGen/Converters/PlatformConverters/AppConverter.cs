@@ -35,6 +35,8 @@ namespace WebGen.PlatformConverters
             _sfactory.Register(typeof(StatementSyntax), new StatementSyntaxConvertor(_sfactory));
             _sfactory.Register(typeof(ExpressionStatementSyntax), new ExpressionStatementSyntaxConvertor(_sfactory));
             _sfactory.Register(typeof(InvocationExpressionSyntax), new InvocationExpressionSyntaxConvertor(_sfactory));
+            _sfactory.Register(typeof(MemberAccessExpressionSyntax), new MemberAccessExpressionSyntaxConvertor(_sfactory));
+            _sfactory.Register(typeof(IdentifierNameSyntax), new IdentifierNameSyntaxConvertor(_sfactory));
         }
 
         public string Convert(string xaml, string csharpCode)

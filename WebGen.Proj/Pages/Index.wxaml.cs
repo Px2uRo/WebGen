@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static WebGen.WorlWideWeb.JS.JSGlobalFunctions;
 
 namespace WebGen.Proj.Pages
 {
@@ -10,19 +11,19 @@ namespace WebGen.Proj.Pages
     {
         public void ShowMessage()
         {
-            WebGen.JS.JSGlobalFunctions.Alert("Hello, WebGen!");
+            Alert("Hello, WebGen!");
 
-            var res = WebGen.JS.JSGlobalFunctions.Confirm("支不支持我们？");
+            var res = WebGen.WorlWideWeb.JS.JSGlobalFunctions.Confirm("支不支持我们？");
 
-            WebGen.JS.JSGlobalFunctions.Alert(res.ToString());
+            WebGen.WorlWideWeb.JS.JSGlobalFunctions.Alert(res.ToString());
 
             if (res)
             {
-                WebGen.JS.JSGlobalFunctions.Alert("用户说：是的。");
+                WebGen.WorlWideWeb.JS.JSGlobalFunctions.Alert("用户说：是的。");
             }
             else
             {
-                WebGen.JS.JSGlobalFunctions.Alert("用户说：不是的。");
+                WebGen.WorlWideWeb.JS.JSGlobalFunctions.Alert("用户说：不是的。");
             }
         }
     }

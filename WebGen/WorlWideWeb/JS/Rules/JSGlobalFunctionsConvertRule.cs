@@ -1,4 +1,4 @@
-﻿namespace WebGen.JS.Rules
+﻿namespace WebGen.WorlWideWeb.JS.Rules
 {
     /// <summary>
     /// 用于将典型 JavaScript 原生函数，转换为其对应的 JS 代码字符串。
