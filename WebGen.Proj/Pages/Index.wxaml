@@ -1,5 +1,10 @@
-﻿<Grid RowDefinitions="300px, 2*" ColumnDefinitions="1*, 3*">
-    <Button Grid.Row="0" Click="ShowMessage" Grid.Column="1" Content="Click Me" />
-    <Button Grid.Row="0" Click="ShowMessage" Grid.Column="1" Content="Click Me" />
-    <TextBlock Grid.Row="1" Grid.Column="0" Text="Hello World!" />
-</Grid>
+﻿<StackPanel>
+	<StackPanel Orientation="Horizontal">
+		<Image Source="favicon.ico" Width="64" Height="64" HorizontalAlignment="Left" Margin="10"/>
+		<TextBlock Text="WebGen!" FontSize="72"/>
+	</StackPanel>
+	<StackPanel Orientation="Horizontal">
+		<Image Source="https://www.bilibili.com/favicon.ico" Width="16" Height="16"/>
+		<HtmlMetaData data="&lt;a href=&quot;https://space.bilibili.com/283605961&quot;&gt;bilibili&lt;/a&gt;"></HtmlMetaData>
+	</StackPanel>
+</StackPanel>

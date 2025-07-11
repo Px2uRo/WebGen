@@ -24,7 +24,6 @@ namespace WebGen.Debug
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();

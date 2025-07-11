@@ -13,7 +13,7 @@ namespace WebGen.Proj.Pages
         {
             Alert("Hello, WebGen!");
 
-            var res = WebGen.WorlWideWeb.JS.JSGlobalFunctions.Confirm("支不支持我们？");
+            var res = Confirm("支不支持我们？");
 
             WebGen.WorlWideWeb.JS.JSGlobalFunctions.Alert(res.ToString());
 

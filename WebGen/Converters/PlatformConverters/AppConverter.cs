@@ -31,6 +31,9 @@ namespace WebGen.PlatformConverters
             _xfactory.Register("Button", new ButtonConverter(_xfactory));
             _xfactory.Register("TextBox", new TextBoxConverter(_xfactory));
             _xfactory.Register("TextBlock",new TextBlockConverter(_xfactory));
+            _xfactory.Register("StackPanel", new StackPanelConverter(_xfactory));
+            _xfactory.Register("HtmlMetaData", new HtmlMetaDataConvertor(_xfactory));
+            _xfactory.Register("Image", new ImageConverter(_xfactory));
 
             _sfactory.Register(typeof(StatementSyntax), new StatementSyntaxConvertor(_sfactory));
             _sfactory.Register(typeof(ExpressionStatementSyntax), new ExpressionStatementSyntaxConvertor(_sfactory));

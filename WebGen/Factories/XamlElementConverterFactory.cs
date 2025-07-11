@@ -18,11 +18,11 @@ namespace WebGen.Core
     {
         public readonly Dictionary<string, XamlElementConverter> Converters = new();
 
-        public void Register(string elementName, XamlElementConverter converter)
+        public virtual void Register(string elementName, XamlElementConverter converter)
         {
             Converters[elementName] = converter;
         }
-        public XElement ConvertElementToHTMLXElement(XElement xamlElement)
+        public virtual XElement ConvertElementToHTMLXElement(XElement xamlElement)
         {
 
             var name = xamlElement.Name.LocalName;
@@ -37,7 +37,7 @@ namespace WebGen.Core
                 throw new InvalidOperationException($"不支持{name}");
             }
         }
-        public string ConvertElementToString(XElement element)
+        public virtual string ConvertElementToString(XElement element)
         {
             var name = element.Name.LocalName;
             if (Converters.TryGetValue(name, out var converter))

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WebGen.Core;
+using WebGen.Utils;
 using WebGen.WorlWideWeb.JS.Rules;
 
 namespace WebGen.Converters.CSharp
@@ -137,7 +138,8 @@ namespace WebGen.Converters.CSharp
                     typeof(Console).Assembly.Location,
                     typeof(JSGlobalFunctionsConvertRule).Assembly.Location,
                     //TODO 项目引用时候直接用反射吧以后
-                    @"I:\Xiong's\MyStudio\WebGen\WebGen\WebGen.Proj\bin\Debug\net6.0\WebGen.Proj.dll"
+                    //@"I:\Xiong's\MyStudio\WebGen\WebGen\WebGen.Proj\bin\Debug\net6.0\WebGen.Proj.dll",
+                    CallerUtil.GetCallingWebAPIAssembly().Location
                 };
                 Parallel.For(0, files.Count, i =>
                 {
