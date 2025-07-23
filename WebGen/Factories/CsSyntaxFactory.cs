@@ -38,7 +38,7 @@ namespace WebGen.Core
         /// <param name="csharpCode">C# 代码</param>
         /// <returns>JS 代码</returns>
         /// <exception cref="InvalidOperationException"></exception>
-        internal string Convert(string csharpCode)
+        public string Convert(string csharpCode)
         {
             var tree = CSharpSyntaxTree.ParseText(csharpCode);
             var rt = tree.GetRoot() as CompilationUnitSyntax;

@@ -4,7 +4,7 @@ using WebGen.Core;
 
 namespace WebGen.Converters.CSharp
 {
-    internal class ExpressionStatementSyntaxConvertor : CSSyntaxConverter
+    public class ExpressionStatementSyntaxConvertor : CSSyntaxConverter
     {
         public ExpressionStatementSyntaxConvertor(CSSyntaxConverterFactory factory) : base(factory)
         {

@@ -1,9 +1,14 @@
-namespace WebGen.Debug
+using MSCM.Configs;
+namespace MSCM
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            //œ»∂¡≈‰÷√°£
+            Config.ReadVedios();
+            Config.ReadFigures();
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.

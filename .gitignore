@@ -361,4 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/WebGen.Debug/WebGen.Debug.csproj
+
+#ignore WebGen.Debug folder
+/WebGen.Debug/

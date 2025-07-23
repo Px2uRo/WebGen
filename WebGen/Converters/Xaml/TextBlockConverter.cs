@@ -8,7 +8,7 @@ using WebGen.Core;
 
 namespace WebGen.Converters.Xaml
 {
-    internal class TextBlockConverter : XamlElementConverter
+    public class TextBlockConverter : XamlElementConverter
     {
         public TextBlockConverter(XamlElementConverterFactory factory) : base(factory)
         {

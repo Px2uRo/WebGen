@@ -10,7 +10,7 @@ using WebGen.Utils.XmlUtil;
 
 namespace WebGen.Converters.Xaml
 {
-    public class GridConverter : XamlElementConverter, DependencyPropertyConverter
+    public class GridConverter : XamlElementConverter, IDependencyPropertyConverter
     {
 
         public GridConverter(XamlElementConverterFactory factory):base(factory) { }

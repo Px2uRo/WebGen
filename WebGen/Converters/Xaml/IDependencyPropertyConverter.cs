@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace WebGen.Converters
 {
-    internal interface DependencyPropertyConverter
+    internal interface IDependencyPropertyConverter
     {
         string GetJSCode(XElement context, string csharp);
         XElement EditXElement(string propty, string value, XElement ownerXaml, XElement HtmlElement);

@@ -1,21 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using System.Reflection;
 using System.Text;
-using WebGen.PlatformConverters;
+using WebGen.Converters;
 
 namespace WebGen.ASPNET
 {
     public static class ContentsGen
     {
-        private static AppConverter _appCv = new AppConverter();
+        private static IProjConverter _appCv = new ASPNETConvertor();
         /// <summary>
         /// 从 wxaml 文件生成内容结果，会判断文件是否存在，若不存在则返回 404。
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static ContentResult Gen(Assembly asm, Uri uri)
+        public static ContentResult Gen(Assembly asm, Uri uri,HttpRequest request = null)
         {
+            if (request != null)
+            {
+                if(_appCv is ASPNETConvertor asp)
+                {
+                    asp.SetRequest(request);
+                }
+            }
             string path = uri.OriginalString.TrimStart('/')
                 .Replace('/', '.')
                 .Replace('\\', '.');

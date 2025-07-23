@@ -4,7 +4,7 @@ using WebGen.Core;
 
 namespace WebGen.Converters.Xaml
 {
-    internal class ImageConverter : XamlElementConverter
+    public class ImageConverter : XamlElementConverter
     {
         public ImageConverter(XamlElementConverterFactory factory) : base(factory)
         {

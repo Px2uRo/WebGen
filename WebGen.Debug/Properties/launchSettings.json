@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "WebGen.Debug": {
+    "MSCM": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

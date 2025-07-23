@@ -6,7 +6,7 @@ using WebGen.Core;
 
 namespace WebGen.Converters.CSharp
 {
-    internal class InvocationExpressionSyntaxConvertor : CSSyntaxConverter
+    public class InvocationExpressionSyntaxConvertor : CSSyntaxConverter
     {
         public InvocationExpressionSyntaxConvertor(CSSyntaxConverterFactory factory) : base(factory)
         {

@@ -1,14 +1,11 @@
-﻿<Page Title="WebGen 生成的小窝">
+﻿<Page Title="WebGen 生成的小窝(Debug)">
 	<StackPanel HorizontalAlignment="Center">
 		<StackPanel Orientation="Horizontal" >
 			<Image Source="favicon.ico" Width="64" Height="64" HorizontalAlignment="Left" Margin="10"/>
-			<TextBlock Text="WebGen!" FontSize="72"/>
+			<TextBlock Text="WebGen.Debug!" FontSize="72"/>
 		</StackPanel>
-		<TextBlock Text="图片" FontSize="16" FontWeight="Bold"/>
-		<HtmlMetaData data="/figures"></HtmlMetaData>
-		<TextBlock Text="视频" FontSize="16" FontWeight="Bold"/>
 		<HtmlMetaData data="/vedios"></HtmlMetaData>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+		<StackPanel Orientation="Horizontal">
 			<Image Source="https://www.bilibili.com/favicon.ico" Width="16" Height="16"/>
 			<HtmlMetaData data="&lt;a href=&quot;https://space.bilibili.com/283605961&quot;&gt;bilibili&lt;/a&gt;"></HtmlMetaData>
 		</StackPanel>

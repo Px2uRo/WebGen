@@ -7,13 +7,14 @@ using static WebGen.WorlWideWeb.JS.JSGlobalFunctions;
 
 namespace WebGen.Proj.Pages
 {
-    internal partial class Index
+    internal partial class DebugPage
     {
         public void ShowMessage()
         {
             Alert("Hello, WebGen!");
 
             var res = Confirm("支不支持我们？");
+
             WebGen.WorlWideWeb.JS.JSGlobalFunctions.Alert(res.ToString());
 
             if (res)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebGen.Core
 {
-    internal class CssStyleManager
+    public class CssStyleManager
     {
         /// <summary>
         /// 暂时未形成有个性化的样式生成逻辑，所以是直接返回一段默认的样式。

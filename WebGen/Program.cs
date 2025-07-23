@@ -1,5 +1,4 @@
 ﻿using WebGen.Converters;
-using WebGen.PlatformConverters;
 using WebGen.Utils.QuickIO;
 
 namespace WebGen
@@ -28,7 +27,7 @@ class any
 }
 ";
 
-            var converter = new AppConverter();
+            IProjConverter converter = null;
             var html = converter.Convert(xaml, cs);
 
             System.Console.WriteLine(html);

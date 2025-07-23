@@ -13,7 +13,7 @@ using WebGen.WorlWideWeb.JS.Rules;
 
 namespace WebGen.Converters.CSharp
 {
-    internal class MemberAccessExpressionSyntaxConvertor: CSSyntaxConverter
+    public class MemberAccessExpressionSyntaxConvertor: CSSyntaxConverter
     {
         public MemberAccessExpressionSyntaxConvertor(CSSyntaxConverterFactory factory) : base(factory)
         {
@@ -103,7 +103,7 @@ namespace WebGen.Converters.CSharp
         }
     }
 
-    internal class ConditionalAccessExpressionSyntax : CSSyntaxConverter
+    public class ConditionalAccessExpressionSyntax : CSSyntaxConverter
     {
         public ConditionalAccessExpressionSyntax(CSSyntaxConverterFactory factory):base(factory)
         {
@@ -115,7 +115,7 @@ namespace WebGen.Converters.CSharp
         }
     }
 
-    internal class IdentifierNameSyntaxConvertor : CSSyntaxConverter
+    public class IdentifierNameSyntaxConvertor : CSSyntaxConverter
     {
         public IdentifierNameSyntaxConvertor(CSSyntaxConverterFactory factory) : base(factory)
         {

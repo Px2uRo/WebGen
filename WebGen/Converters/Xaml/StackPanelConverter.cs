@@ -9,7 +9,7 @@ using WebGen.Utils.XmlUtil;
 
 namespace WebGen.Converters.Xaml
 {
-    public class StackPanelConverter : XamlElementConverter, DependencyPropertyConverter
+    public class StackPanelConverter : XamlElementConverter, IDependencyPropertyConverter
     {
         public StackPanelConverter(XamlElementConverterFactory factory) : base(factory) { }
 
@@ -34,32 +34,69 @@ namespace WebGen.Converters.Xaml
         // 生成 HTML <table> 元素并添加子项（初始为直接子元素）
         private XElement generateHtmlXElement(XElement element)
         {
-            // 创建表格容器
-            XElement table = new XElement("table");
-            table.SetAttributeValue("width", "100%");
-            table.SetAttributeValue("border", "0");
-            // 遍历 StackPanel 的所有子元素，转换为 HTML，并添加到表格中（后续会重组行列）
-            var isver = IsVertical(element);
-            foreach (var child in element.Elements())
+            var isVertical = IsVertical(element);
+
+            // 外层容器 table
+            var containerTable = new XElement("table");
+            //containerTable.SetAttributeValue("width", "100%");
+            containerTable.SetAttributeValue("border", "0");
+
+            if (isVertical)
             {
-                var hc = _factory.ConvertElementToHTMLXElement(child);
-                if (isver)
+                // 每个子元素放在一个 tr 中
+                foreach (var child in element.Elements())
                 {
-                    XElement td = new XElement("td", hc);
-                    XElement tr = new XElement("tr", td);
-                    table.Add(tr);
+                    var childContent = _factory.ConvertElementToHTMLXElement(child);
+                    var td = new XElement("td", childContent);
+                    var tr = new XElement("tr", td);
+                    containerTable.Add(tr);
+                    TreeUtil.HandleDPAfterAdded(_factory, child, childContent);
                 }
-                else
-                {
-                    XElement td = new XElement("td", hc);
-                    table.Add(td);
-                }
-                // 处理依赖属性（如 Margin、Alignment 等）
-                TreeUtil.HandleDPAfterAdded(_factory, child, hc);
             }
-            // 处理 StackPanel 本身的其他依赖属性
-            return base.HandleDependencyProperties(element, table);
+            else
+            {
+                // 所有子元素在同一行
+                var tr = new XElement("tr");
+                foreach (var child in element.Elements())
+                {
+                    var childContent = _factory.ConvertElementToHTMLXElement(child);
+                    var td = new XElement("td", childContent);
+                    tr.Add(td);
+                    TreeUtil.HandleDPAfterAdded(_factory, child, childContent);
+                }
+                containerTable.Add(tr);
+            }
+
+            // 处理对齐属性
+            var alignAttr = element.Attribute("HorizontalAlignment")?.Value;
+            if (alignAttr == "Center")
+            {
+                // 添加 style（只添加一次）
+                EnsureCenteredStyleAdded();
+                containerTable.SetAttributeValue("class", "centered");
+            }
+            else if (alignAttr == "Right")
+            {
+                //TODO 右对齐的处理方式
+                //EnsureRightStyleAdded();
+                //containerTable.SetAttributeValue("style", "margin-left:auto; margin-right:0;");
+            }
+
+            return base.HandleDependencyProperties(element, containerTable);
         }
+        private void EnsureCenteredStyleAdded()
+        {
+            if (!_factory.HtmlHead.Elements("style").Any(e => e.Value.Contains(".centered")))
+            {
+                _factory.HtmlHead.Add(new XElement("style", @"
+.centered {
+  /*display: block;*/
+  margin-left: auto;
+  margin-right: auto;
+}"));
+            }
+        }
+
 
         // 将 StackPanel 转换为 HTML XElement（与 ConvertToHtmlString 类似）
         public override XElement ConvertToHtmlXElement(XElement element)

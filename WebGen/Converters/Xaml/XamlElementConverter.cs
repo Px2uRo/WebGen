@@ -35,7 +35,7 @@ namespace WebGen.Converters.Xaml
                 var name = attribute.Key[..attribute.Key.ToString().IndexOf('.')];
                 if (_factory.Converters.TryGetValue(name, out var converter))
                 {
-                    if(converter is DependencyPropertyConverter c)
+                    if(converter is IDependencyPropertyConverter c)
                     {
                         c.EditXElement(attribute.Key, attribute.Value, sourceElement.FindParent(name), htmlElement); ;
                     }
