@@ -52,7 +52,7 @@ namespace WebGen.Converters.CSharp
                 var semanticModel = compilation.GetSemanticModel(ma.SyntaxTree);
 
                 var symbolInfo = semanticModel.GetSymbolInfo(ma);
-                var symbol = symbolInfo.Symbol;
+                var symbol = symbolInfo.Symbol;//这里就是语义分析器了
 
                 if (symbol is IMethodSymbol me)
                 {

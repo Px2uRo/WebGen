@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "启动": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\MSCM\\MSCM.csproj"
+    }
+  }
+}

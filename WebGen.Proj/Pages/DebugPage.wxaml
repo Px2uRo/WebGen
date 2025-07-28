@@ -4,7 +4,9 @@
 			<Image Source="favicon.ico" Width="64" Height="64" HorizontalAlignment="Left" Margin="10"/>
 			<TextBlock Text="WebGen.Debug!" FontSize="72"/>
 		</StackPanel>
-		<HtmlMetaData data="/vedios"></HtmlMetaData>
+		<StackPanel Orientation="Horizontal">
+			<HtmlMetaData data="/vedios"></HtmlMetaData>
+		</StackPanel>
 		<StackPanel Orientation="Horizontal">
 			<Image Source="https://www.bilibili.com/favicon.ico" Width="16" Height="16"/>
 			<HtmlMetaData data="&lt;a href=&quot;https://space.bilibili.com/283605961&quot;&gt;bilibili&lt;/a&gt;"></HtmlMetaData>

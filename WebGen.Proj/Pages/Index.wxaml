@@ -1,11 +1,13 @@
-﻿<Page Title="WebGen 生成的小窝">
+﻿<Page Title="MSCM">
 	<StackPanel HorizontalAlignment="Center">
 		<StackPanel Orientation="Horizontal" >
 			<Image Source="favicon.ico" Width="64" Height="64" HorizontalAlignment="Left" Margin="10"/>
-			<TextBlock Text="WebGen!" FontSize="72"/>
+			<TextBlock Text="MSCM!" FontSize="72"/>
 		</StackPanel>
 		<TextBlock Text="图片" FontSize="16" FontWeight="Bold"/>
-		<HtmlMetaData data="/figures"></HtmlMetaData>
+		<StackPanel Orientation="Horizontal"  Width="200">
+		<HtmlMetaData data="/figures?IsPage=false"></HtmlMetaData>
+		</StackPanel>
 		<TextBlock Text="视频" FontSize="16" FontWeight="Bold"/>
 		<HtmlMetaData data="/vedios"></HtmlMetaData>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
