@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 #ignore MSCM folder
 /MSCM/
+/ReMSCM/
+/CommonStatics/

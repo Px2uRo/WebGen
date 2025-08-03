@@ -48,8 +48,9 @@ namespace WebGen.Converters.Xaml
                             {
                                 if (value.StartsWith("/"))
                                 {
-                                    var a = _info.GetHost();
-                                    return XElement.Parse(GetExternalPage($"http://{a}{value}"));
+                                    var u = _info.GetFullUrl();
+                                    var p = u[..(u.Length - 1)];
+                                    return XElement.Parse(GetExternalPage($"{p}{value}"));
                                 }
                             }
                         }

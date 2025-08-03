@@ -1,6 +1,10 @@
 {
   "profiles": {
-    "启动": {
+    "ReMSCM": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\ReMSCM\\ReMSCM.csproj"
+    },
+    "MSCM": {
       "commandName": "DebugRoslynComponent",
       "targetProject": "..\\MSCM\\MSCM.csproj"
     }
