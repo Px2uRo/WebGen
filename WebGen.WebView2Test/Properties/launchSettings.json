@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WebGen.WebView2Test (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WebGen.WebView2Test (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

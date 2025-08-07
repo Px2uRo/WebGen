@@ -1,4 +1,6 @@
-﻿using System;
+﻿// 然后这里先抄了WPF 然后抄了 Avalonia。
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +10,7 @@ using WebGen.Attributes;
 
 namespace Wedency
 {
-    [WebGenClass]
+    [CodeGenClass]
     public sealed class DependencyProperty
     {
         /// <summary>指定WPF属性系统使用的一个静态值，而不是 <see langword="null" />，表示该属性存在，但未通过属性系统设置其值。</summary>

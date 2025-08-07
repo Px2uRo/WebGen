@@ -3,7 +3,7 @@
 namespace Wedency;
 
 /// <summary>表示参与依赖属性系统的对象。</summary>
-[WebGenClass]
+[CodeGenClass]
 public class DependencyObject //不是 : DispatcherObject 就别来了
 {
     /// <summary>获取包装此实例 CLR 类型的 DependencyObjectType。</summary>

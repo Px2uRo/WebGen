@@ -25,6 +25,12 @@ namespace WebGen.EdgeDriverTest
         }
 
         [TestMethod]
+        public void StartHost(string[] args)
+        {
+            WebGen.MinimalAPI.Program.Main(args);
+        }
+
+        [TestMethod]
         public void VerifyPageTitle()
         {
             
