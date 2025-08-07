@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GenMSCM": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject":"..\\GenMSCM\\GenMSCM.csproj"
+    }
+  }
+}

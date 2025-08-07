@@ -49,7 +49,7 @@ namespace WebGen.Converters.Xaml
                                 if (value.StartsWith("/"))
                                 {
                                     var u = _info.GetFullUrl();
-                                    var p = u[..(u.Length - 1)];
+                                    var p = u.Substring(0,u.Length - 1);
                                     return XElement.Parse(GetExternalPage($"{p}{value}"));
                                 }
                             }

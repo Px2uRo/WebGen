@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebGen.BasicControls
+namespace WebGen.CodeGen
 {
-    public class WebApplication
+    internal class ClassTemplates
     {
-
     }
 }

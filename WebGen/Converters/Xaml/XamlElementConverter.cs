@@ -32,7 +32,7 @@ namespace WebGen.Converters.Xaml
             foreach (var attribute in attributes)   
             {
 
-                var name = attribute.Key[..attribute.Key.ToString().IndexOf('.')];
+                var name = attribute.Key.Substring(0,attribute.Key.ToString().IndexOf('.'));
                 if (_factory.Converters.TryGetValue(name, out var converter))
                 {
                     if(converter is IDependencyPropertyConverter c)
