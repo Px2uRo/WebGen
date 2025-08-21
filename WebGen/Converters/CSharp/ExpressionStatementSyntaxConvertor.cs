@@ -16,7 +16,7 @@ namespace WebGen.Converters.CSharp
             var es = syntax as ExpressionStatementSyntax;
             if (es.Expression is InvocationExpressionSyntax invo)
             {
-                return _factory.Converters[typeof(InvocationExpressionSyntax)].ConvertToJSString(invo);
+                return Factory.Converters[typeof(InvocationExpressionSyntax)].ConvertToJSString(invo);
             }
             else
             {

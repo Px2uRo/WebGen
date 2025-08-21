@@ -18,7 +18,7 @@ namespace WebGen.Converters.CSharp
             var invo = syntax as InvocationExpressionSyntax;
             var expr = invo.Expression;
             var a = invo.Expression.GetType();
-            return _factory.Converters[invo.Expression.GetType()].ConvertToJSString(invo.Expression);
+            return Factory.Converters[invo.Expression.GetType()].ConvertToJSString(invo.Expression);
             throw new InvalidOperationException($"不支持的语法节点类型: {syntax.GetType()}");
         }
     }

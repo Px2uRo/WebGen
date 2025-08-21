@@ -1,15 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <>netstandard2.0;net8.0</>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\WebGen.BasicControls\WebGen.BasicControls.csproj" />
     <ProjectReference Include="..\WebGen.Core\WebGen.Core.csproj" />
   </ItemGroup>
-
 </Project>

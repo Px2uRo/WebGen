@@ -1,6 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace WebGen.CodeGen
@@ -18,7 +20,10 @@ namespace WebGen.CodeGen
             foreach (var item in context.AdditionalFiles)
             {
                 var a = item.GetText();
-                
+            }
+            foreach (var item in context.Compilation.SyntaxTrees)
+            {
+
             }
         }
     }

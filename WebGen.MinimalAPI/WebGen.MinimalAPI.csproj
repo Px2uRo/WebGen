@@ -1,14 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+	  <TargetFramework>net8.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <InvariantGlobalization>true</InvariantGlobalization>
 	  <LangVersion>latest</LangVersion>
-    <!--<PublishAot>true</PublishAot>-->
+	  <PublishAot>true</PublishAot>
   </PropertyGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\WebGen.CodeGen\WebGen.CodeGen.csproj" OutputItemType="Analyzer" RefrenceOutputAssembly="false" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WebGen.CodeGen" Version="0.0.0" />
+  </ItemGroup>
 </Project>

@@ -1,29 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
   </PropertyGroup>
-
-
   <ItemGroup>
-	  <ProjectReference Include="..\WebGen.ASPNET\WebGen.ASPNET.csproj" />
-	  <ProjectReference Include="..\WebGen\WebGen.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-	  <EmbeddedResource Include="Pages\DebugPage.wxaml" />
-	  <EmbeddedResource Include="Pages\DebugPage.wxaml.cs" />
-	  <EmbeddedResource Include="Pages\Index.wxaml" />
-	  <EmbeddedResource Include="Pages\Index.wxaml.cs" />
+    <ProjectReference Include="..\WebGen.ASPNET\WebGen.ASPNET.csproj" />
+    <ProjectReference Include="..\WebGen\WebGen.csproj" />
   </ItemGroup>
   <ItemGroup>
-	  <Compile Include="App.cs" />
-	  <Compile Include="Pages\Index.wxaml.cs" />
-	  <Compile Include="Pages\DebugPage.wxaml.cs" />
-	</ItemGroup>
+    <EmbeddedResource Include="Pages\DebugPage.wxaml" />
+    <EmbeddedResource Include="Pages\DebugPage.wxaml.cs" />
+    <EmbeddedResource Include="Pages\Index.wxaml" />
+    <EmbeddedResource Include="Pages\Index.wxaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Pages\Index.wxaml.cs" />
+    <Compile Include="Pages\DebugPage.wxaml.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0">
       <PrivateAssets>all</PrivateAssets>
@@ -31,5 +27,4 @@
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.14.0" />
   </ItemGroup>
-
 </Project>

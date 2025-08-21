@@ -26,5 +26,5 @@ namespace WebGen.BasicControls
     public class Application
     {
         
-    }
+    }       
 }

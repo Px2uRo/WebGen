@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedUnitTest", "SharedUnitTest\SharedUnitTest.shproj", "{5E08F936-512E-428D-80FE-78729E440545}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,8 +141,14 @@ Global
 		{97731D7F-A938-4B13-AFD0-4E2F83E9A9E6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{3C5DBA34-0BB9-4993-AFE0-F56A481434BC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{0BFD5AA9-4942-4DE9-B495-7B706CD439A8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5E08F936-512E-428D-80FE-78729E440545} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7A9455B-9061-48E5-AC51-FF02E32880E3}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedUnitTest\SharedUnitTest.projitems*{0f1fd9e6-9307-4995-9898-072f1d88bf24}*SharedItemsImports = 5
+		SharedUnitTest\SharedUnitTest.projitems*{3c5dba34-0bb9-4993-afe0-f56a481434bc}*SharedItemsImports = 5
+		SharedUnitTest\SharedUnitTest.projitems*{5e08f936-512e-428d-80fe-78729e440545}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

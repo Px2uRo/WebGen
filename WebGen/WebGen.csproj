@@ -1,11 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>library</OutputType>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <PublishAot>false</PublishAot>
+	  <!-- 仅被引用，不自己 AOT -->
+	  <IsTrimmable>true</IsTrimmable>
+	  <OutputType>library</OutputType>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
 	  <LangVersion>latest</LangVersion>
+
+	  <PackageId>MyPackage</PackageId>
+	  <Authors>YourName</Authors>
   </PropertyGroup>
 
   <ItemGroup>

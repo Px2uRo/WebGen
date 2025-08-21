@@ -6,15 +6,18 @@ namespace WebGen.MinimalAPI
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateSlimBuilder(args);
 
+            Console.WriteLine("Hello the World that I hated!!");
+
+#if false
+
+            var builder = WebGenASPApplication.GetBuilder<App>(args);
+                
             builder.Services.ConfigureHttpJsonOptions(options =>
             {
                 options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
             });
-
-            var app = builder.Build();
-
+                
             var sampleTodos = new Todo[] {
                 new(1, "Walk the dog"),
                 new(2, "Do the dishes", DateOnly.FromDateTime(DateTime.Now)),
@@ -22,8 +25,8 @@ namespace WebGen.MinimalAPI
                 new(4, "Clean the bathroom"),
                 new(5, "Clean the car", DateOnly.FromDateTime(DateTime.Now.AddDays(2)))
             };
-
-            var todosApi = app.MapGroup("/todos");
+            var app = builder.Build<App>();
+            var todosApi = app.Inner.MapGroup("/todos");
             todosApi.MapGet("/", () => sampleTodos);
             todosApi.MapGet("/{id}", (int id) =>
                 sampleTodos.FirstOrDefault(a => a.Id == id) is { } todo
@@ -31,6 +34,7 @@ namespace WebGen.MinimalAPI
                     : Results.NotFound());
 
             app.Run();
+#endif
         }
     }
 

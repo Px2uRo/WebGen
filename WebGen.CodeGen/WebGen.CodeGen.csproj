@@ -1,37 +1,71 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+		<IsRoslynComponent>true</IsRoslynComponent>
+		<LangVersion>latest</LangVersion>
+		<OutputItemType>Analyzer</OutputItemType>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		<!-- NuGet 包信息 -->
+		<PackageId>WebGen.CodeGen</PackageId>
+		<Authors>Px2uRo</Authors>
+		<Description>Code Generators for WebGen Projects</Description>
+		<!-- 离线包目录 -->
+		<OfflinePackagesDir>D:\MyNupkgs\WebGen.CodeGen</OfflinePackagesDir>
+		<!-- 标记这是 Analyzer/Source Generator 项目 -->
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
 
-  <PropertyGroup>
-	  <TargetFramework>netstandard2.0</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-	  <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
-	  <IsRoslynComponent>true</IsRoslynComponent>
-	  <LangVersion>latest</LangVersion>
-	  <OutputItemType>Analyzer</OutputItemType>
-	  <IncludeBuildOutput>false</IncludeBuildOutput>
-	  <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+	<!-- 每次 build 后生成 NuGet 包到离线目录 -->
+	<Target Name="PublishToOfflinePackages" AfterTargets="Build">
+		<MakeDir Directories="$(OfflinePackagesDir)" />
+		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High"/>
 
-
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="readme.md" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="readme.md" />
-  </ItemGroup>
+	</Target>
+	<!-- 每次 Pack 前递增版本号 -->
+	<Target Name="IncrementVersion" BeforeTargets="Pack">
+		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -InputValue &quot;true&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
+		</Exec>
+		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)IncrementBuild.ps1&quot;" StandardOutputImportance="High">
+			<Output TaskParameter="ConsoleOutput" PropertyName="BUILDNUM" />
+		</Exec>
+		<PropertyGroup>
+			<!-- 如果 BUILDNUM 为空或未设置，则默认为 0 -->
+			<BUILDNUM Condition="'$(BUILDNUM)'==''">0</BUILDNUM>
+			<Version>0.0.0.$(BUILDNUM)</Version>
+		</PropertyGroup>
+	</Target>
+	<PropertyGroup>
+		<!-- 如果 BUILDNUM 为空或未设置，则默认为 0 -->
+		<BUILDNUM Condition="'$(BUILDNUM)'==''">0</BUILDNUM>
+		<Version>0.0.0.$(BUILDNUM)</Version>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="IncrementBuild.ps1" />
+		<None Remove="readme.md" />
+	</ItemGroup>
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);RS1042</NoWarn>
+		<NoWarn>$(NoWarn);RS1035</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="IncrementBuild.ps1" />
+		<AdditionalFiles Include="readme.md" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="true" />
 	</ItemGroup>
-
 	<ItemGroup>
-	  <ProjectReference Include="..\WebGen.BasicControls\WebGen.Controls.csproj" />
+		<ProjectReference Include="..\WebGen.BasicControls\WebGen.Controls.csproj" ReferenceOutputAssembly="false" />
 	</ItemGroup>
-
 </Project>

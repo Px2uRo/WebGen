@@ -1,0 +1,1 @@
+﻿这个库可以类比成Avalonia.Base
