@@ -14,6 +14,7 @@
 		<PackageId>WebGen.CodeGen</PackageId>
 		<Authors>Px2uRo</Authors>
 		<Description>Code Generators for WebGen Projects</Description>
+		<PackageIcon>WebGen.CodeGen.png</PackageIcon>
 		<!-- 离线包目录 -->
 		<OfflinePackagesDir>D:\MyNupkgs\WebGen.CodeGen</OfflinePackagesDir>
 		<!-- 标记这是 Analyzer/Source Generator 项目 -->
@@ -24,38 +25,31 @@
 	<!-- 每次 build 后生成 NuGet 包到离线目录 -->
 	<Target Name="PublishToOfflinePackages" AfterTargets="Build">
 		<MakeDir Directories="$(OfflinePackagesDir)" />
-		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High"/>
-
+		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High" />
 	</Target>
 	<!-- 每次 Pack 前递增版本号 -->
 	<Target Name="IncrementVersion" BeforeTargets="Pack">
 		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -InputValue &quot;true&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
 			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
 		</Exec>
-		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)IncrementBuild.ps1&quot;" StandardOutputImportance="High">
-			<Output TaskParameter="ConsoleOutput" PropertyName="BUILDNUM" />
-		</Exec>
-		<PropertyGroup>
-			<!-- 如果 BUILDNUM 为空或未设置，则默认为 0 -->
-			<BUILDNUM Condition="'$(BUILDNUM)'==''">0</BUILDNUM>
-			<Version>0.0.0.$(BUILDNUM)</Version>
-		</PropertyGroup>
 	</Target>
-	<PropertyGroup>
-		<!-- 如果 BUILDNUM 为空或未设置，则默认为 0 -->
-		<BUILDNUM Condition="'$(BUILDNUM)'==''">0</BUILDNUM>
-		<Version>0.0.0.$(BUILDNUM)</Version>
-	</PropertyGroup>
+	<!--Pack 后设置 PS 脚本-->
+	<Target Name="IncrementVersion" AfterTargets="Pack">
+		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -DirectSet &quot;false&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
+		</Exec>
+	</Target>
 	<ItemGroup>
-		<None Remove="IncrementBuild.ps1" />
 		<None Remove="readme.md" />
+		<None Include="WebGen.CodeGen.png" Pack="True">
+		  <PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 	<PropertyGroup>
 		<NoWarn>$(NoWarn);RS1042</NoWarn>
 		<NoWarn>$(NoWarn);RS1035</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Include="IncrementBuild.ps1" />
 		<AdditionalFiles Include="readme.md" />
 	</ItemGroup>
 	<ItemGroup>

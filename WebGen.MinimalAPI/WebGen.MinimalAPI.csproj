@@ -8,6 +8,8 @@
 	  <PublishAot>true</PublishAot>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WebGen.CodeGen" Version="0.0.0" />
+    <PackageReference Include="WebGen.ASPNET" Version="0.0.0" />
+    <PackageReference Include="WebGen.CodeGen" Version="0.0.0.12" />
+    <PackageReference Include="WebGen.Controls" Version="0.0.0.3" />
   </ItemGroup>
 </Project>

@@ -1,23 +1,55 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-	  <TargetFrameworks>net8.0</TargetFrameworks>
-	  <Nullable>enable</Nullable> 
-	  <ImplicitUsings>enable</ImplicitUsings> 
-	  <InvariantGlobalization>true</InvariantGlobalization> 
-	  <LangVersion>latest</LangVersion> 
-  </PropertyGroup>
-  <ItemGroup>
-    <!-- 可被 MinimalAPI 或其他 AOT 项目引用 -->
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<LangVersion>latest</LangVersion>
+		<!--NuGet 有关-->
+		<PackageId>WebGen.ASPNET</PackageId>
+		<Authors>Px2uRo</Authors>
+		<Description>ASP.NET Dependencies for WebGen Projects</Description>
+		<PackageIcon>WebGen.ASPNET.png</PackageIcon>
+		<OfflinePackagesDir>D:\MyNupkgs\WebGen.ASPNET</OfflinePackagesDir>
+	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\WebGen.BasicControls\WebGen.Controls.csproj" />
-		<ProjectReference Include="..\WebGen.CodeGen\WebGen.CodeGen.csproj" OutputItemType="Analyzer" RefrenceOutputAssembly="false" />
-		<ProjectReference Include="..\Wedency\Wedency.csproj" />
+		<!--图标-->
+		<None Include="WebGen.ASPNET.png">
+			<Pack>true</Pack>
+			<PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.14.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
-  </ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.14.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+		<PackageReference Include="WebGen.CodeGen" Version="0.0.0.12" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\WebGen.BasicControls\WebGen.Controls.csproj" />
+	</ItemGroup>
+
+	<!--生成和 pack 事件-->
+	<Target Name="PublishToOfflinePackages" AfterTargets="Build">
+		<MakeDir Directories="$(OfflinePackagesDir)" />
+		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High" />
+	</Target>
+
+	<Target Name="IncrementVersionBeforePack" BeforeTargets="Pack">
+		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -InputValue true -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
+		</Exec>
+	</Target>
+
+	<Target Name="IncrementVersionAfterPack" AfterTargets="Pack">
+		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -DirectSet false -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
+		</Exec>
+	</Target>
 </Project>

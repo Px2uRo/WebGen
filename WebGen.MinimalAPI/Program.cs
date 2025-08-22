@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using WebGen.ASPNET;
 
 namespace WebGen.MinimalAPI
 {
@@ -9,7 +10,7 @@ namespace WebGen.MinimalAPI
 
             Console.WriteLine("Hello the World that I hated!!");
 
-#if false
+#if true
 
             var builder = WebGenASPApplication.GetBuilder<App>(args);
                 

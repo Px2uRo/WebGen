@@ -9,6 +9,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
+
+
+	  <!--NuGet 有关-->
+	  <PackageId>Wedency</PackageId>
+	  <Authors>Px2uRo</Authors>
+	  <Description>DependecyProperties Libraries for WebGen Projects</Description>
+	  <PackageIcon>Wedency.png</PackageIcon>
+	  <OfflinePackagesDir>D:\MyNupkgs\Wedency</OfflinePackagesDir>
   </PropertyGroup>
   <PropertyGroup>
     <ProduceOnlyReferenceAssembly>true</ProduceOnlyReferenceAssembly>
@@ -23,4 +31,31 @@
   <ItemGroup>
     <ProjectReference Include="..\WebGen\WebGen.csproj" />
   </ItemGroup>
+
+
+	<ItemGroup>
+		<!--图标-->
+		<None Include="Wedency.png">
+			<Pack>true</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<!--生成和 pack 事件-->
+	<Target Name="PublishToOfflinePackages" AfterTargets="Build">
+		<MakeDir Directories="$(OfflinePackagesDir)" />
+		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High" />
+	</Target>
+
+	<Target Name="IncrementVersionBeforePack" BeforeTargets="Pack">
+		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -InputValue true -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
+		</Exec>
+	</Target>
+
+	<Target Name="IncrementVersionAfterPack" AfterTargets="Pack">
+		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -DirectSet false -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
+			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
+		</Exec>
+	</Target>
 </Project>
