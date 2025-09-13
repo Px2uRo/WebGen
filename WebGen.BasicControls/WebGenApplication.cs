@@ -11,6 +11,6 @@ namespace WebGen.Controls
     [WebGenBase]
     public class WebGenApplication//: IGlobalDataTemplates //TODO 不知道怎么用
     {
-
+        public WebGenApplication Current { get; protected set; }
     }
 }

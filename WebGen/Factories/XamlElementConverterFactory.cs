@@ -12,7 +12,7 @@ using WebGen.Converters.Xaml;
 namespace WebGen.Core
 {
     /// <summary>
-    /// 这个类是抽象层面的用来注册和管理 XAML 元素转换器的工厂类。
+    /// 这个类是抽象类，的用来注册和管理 XAML 元素转换器的工厂类。
     /// </summary>
     public abstract class XamlElementConverterFactory
     {
@@ -49,7 +49,9 @@ namespace WebGen.Core
             return $"<div>{element.Value}</div>"; // 默认转换
         }
     }
-
+    /// <summary>
+    /// 这个接口允许你的工厂提供请求相关信息，其实我后来也不一定会用。
+    /// </summary>
     public interface IProvideRequestInfo
     {
             string GetMethod();

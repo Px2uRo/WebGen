@@ -2,7 +2,11 @@
   "profiles": {
     "GenMSCM": {
       "commandName": "DebugRoslynComponent",
-      "targetProject":"..\\GenMSCM\\GenMSCM.csproj"
+      "targetProject": "..\\GenMSCM\\GenMSCM.csproj"
+    },
+    "WebGen.MinimalAPI": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\WebGen.MinimalAPI\\WebGen.MinimalAPI.csproj"
     }
   }
 }

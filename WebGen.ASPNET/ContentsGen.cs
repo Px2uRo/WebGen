@@ -9,7 +9,7 @@ namespace WebGen.ASPNET
 {
     public static class ContentsGen
     {
-        private static IProjConverter _appCv = new ASPNETConvertor();
+        private static IPageConverter _appCv = new ASPNETConvertor();
         /// <summary>
         /// 从 wxaml 文件生成内容结果，会判断文件是否存在，若不存在则返回 404。
         /// </summary>

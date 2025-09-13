@@ -12,7 +12,6 @@ namespace WebGen.Converters.Xaml
 {
     public class GridConverter : XamlElementConverter, IDependencyPropertyConverter
     {
-
         public GridConverter(XamlElementConverterFactory factory):base(factory) { }
 
         public override string ConvertToHtmlString(XElement element)

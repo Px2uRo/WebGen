@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,18 @@ namespace WebGen.ASPNET
         }
 
     }
+    
+    public static class CodeGenExtensions
+    {
+        public static WebGenASPApplication UseASPNET(this WebGenASPApplication app)
+        {
+            app.Inner.MapGet("CodeGenInfo.json", () => Results.Content($"{{\"useaspnet\":true}}",contentType: "application/json"));
+        return app;
+        }
+    }
     public class WebGenASPApplication : WebGenApplication
     {
+        public static new WebGenASPApplication Current { get; private set; }
         public WebApplication Inner { get; set; }
         public WebGenASPApplication()
         {
@@ -36,7 +47,8 @@ namespace WebGen.ASPNET
             var inner = builder.Build();
 
             var res = new WebGenASPApplication();
-            res .Inner = inner;
+            Current = res;
+            res.Inner = inner;
             return res;
         }
         

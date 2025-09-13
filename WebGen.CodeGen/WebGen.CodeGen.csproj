@@ -13,7 +13,7 @@
 		<!-- NuGet 包信息 -->
 		<PackageId>WebGen.CodeGen</PackageId>
 		<Authors>Px2uRo</Authors>
-		<Description>Code Generators for WebGen Projects</Description>
+		<Description>Code Generators for WebGen Projects, I didn't add ASP.NET Core to Referernce but it does NOT mean it cannot Generate ASP.NET Core Codes,All you need is just to add app.UseASPNET(); invocation in App.Main(string args)</Description>
 		<PackageIcon>WebGen.CodeGen.png</PackageIcon>
 		<!-- 离线包目录 -->
 		<OfflinePackagesDir>D:\MyNupkgs\WebGen.CodeGen</OfflinePackagesDir>
@@ -60,6 +60,6 @@
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="true" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\WebGen.BasicControls\WebGen.Controls.csproj" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\WebGen.BasicControls\WebGen.Controls.csproj" ReferenceOutputAssembly="true" />
 	</ItemGroup>
 </Project>

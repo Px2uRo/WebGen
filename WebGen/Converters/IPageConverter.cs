@@ -14,7 +14,7 @@ namespace WebGen.Converters
     /// <summary>
     /// 文档转换入口，负责将 XAML 和 C# 代码转换为 HTML、CSS 和 JavaScript。等待接口化来适应各种各样浏览器
     /// </summary>
-    public interface IProjConverter
+    public interface IPageConverter
     {
         XamlElementConverterFactory Xfactory { get; set; }
         CSSyntaxConverterFactory Sfactory { get; set; }

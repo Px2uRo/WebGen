@@ -1,8 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
+using System;
 
-namespace WebGen.EdgeDriverTest
+namespace WebDriverTests
 {
     [TestClass]
     public class EdgeDriverTest
@@ -16,28 +17,23 @@ namespace WebGen.EdgeDriverTest
         [TestInitialize]
         public void EdgeDriverInitialize()
         {
-            // Initialize edge driver 
-            var options = new EdgeOptions
-            {
-                PageLoadStrategy = PageLoadStrategy.Normal
-            };
-            _driver = new EdgeDriver(options);
+            OurAppMustBeAbleToRun(new string[0]);
         }
 
         [TestMethod]
-        public void StartHost(string[] args)
+        private void OurAppMustBeAbleToRun(string [] args)
         {
-            WebGen.MinimalAPI.Program.Main(args);
+            
         }
 
         [TestMethod]
         public void VerifyPageTitle()
         {
-            
-            _driver.Navigate().GoToUrl("https://cn.bing.com");
-            if (!_driver.Title.Contains("必应"))
+            // Replace with your own test logic
+            _driver.Url = "https://www.bing.com";
+            if(!_driver.Title .Contains( "必应"))
             {
-                throw new InternalTestFailureException();
+                throw new Exception("");
             }
         }
 

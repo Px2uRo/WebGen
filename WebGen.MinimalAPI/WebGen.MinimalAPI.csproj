@@ -8,8 +8,16 @@
 	  <PublishAot>true</PublishAot>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WebGen.ASPNET" Version="0.0.0" />
-    <PackageReference Include="WebGen.CodeGen" Version="0.0.0.12" />
-    <PackageReference Include="WebGen.Controls" Version="0.0.0.3" />
+    <None Remove="*.wxmal" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="*.wxmal" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="MainView.wxaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebGen.ASPNET\WebGen.ASPNET.csproj" />
+    <ProjectReference Include="..\WebGen.CodeGen\WebGen.CodeGen.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

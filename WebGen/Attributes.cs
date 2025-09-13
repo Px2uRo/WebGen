@@ -3,15 +3,6 @@ using WebGen.Converters.CSharp;
 
 namespace WebGen.Attributes
 {
-    [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    sealed class GenMinimalAPIAttribute : Attribute
-    {
-        // This is a positional argument
-        public GenMinimalAPIAttribute(string positionalString)
-        {
-
-        }
-    }
     /// <summary>
     /// 该属性用于指明源生成器用别的方法把这个类转换成转换成JS。
     /// </summary>
@@ -55,6 +46,34 @@ namespace WebGen.Attributes
         public WebGenBaseClassAttribute()
         {
             
+        }
+    }
+
+    /// <summary>
+    /// 就是一个 HTTP 动词表。全部大写是因为 Swagger 就是这么干的。
+    /// </summary>
+    public enum HttpVerbs
+    {
+        GET = 0,
+        POST = 2,
+        PUT = 4,
+        PATCH = 8,
+        DELETE = 16,
+        HEAD = 32,
+        OPTIONS = 64
+    }
+
+    /// <summary>
+    /// 加在一个方法上，用来快速生成 WebAPI，说明这个方法会被导出到 Minimal API 的 Endpoint 中。
+    /// 方法返回的东西会被序列化成 JSON，序列化器用的是 System.Text.JSON。
+    /// 访问该方法使用 api.<see cref=""/>
+    /// </summary>
+    [System.AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
+    sealed class MinimalAPIExportAttribute:Attribute
+    {
+        public MinimalAPIExportAttribute(HttpVerbs verb = HttpVerbs.GET)
+        {
+
         }
     }
 }

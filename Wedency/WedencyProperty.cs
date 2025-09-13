@@ -9,7 +9,7 @@ using WebGen.Attributes;
 using WebGen.Collections;
 
 namespace Wedency
-{    
+{
     /// <summary>
     /// Defines possible binding modes.
     /// </summary>
@@ -540,5 +540,10 @@ namespace Wedency
 #endif
     }
 
+    [MinimalAPICodeGen]
+    public static class WedencyPropertyRegister
+    {
+
+    }
 }
 

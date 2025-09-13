@@ -27,7 +27,7 @@ class any
 }
 ";
 
-            IProjConverter converter = null;
+            IPageConverter converter = null;
             var html = converter.Convert(xaml, cs);
 
             System.Console.WriteLine(html);

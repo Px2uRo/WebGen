@@ -86,7 +86,7 @@ namespace Wedency
     /// 加在一个类上，主要是用来给View用的
     /// </summary>
     [System.AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
-    public sealed class MinimalAPICodeGenAttribute : WedencyClassAttribute
+    public class MinimalAPICodeGenAttribute : WedencyClassAttribute
     {
         public MinimalAPICodeGenAttribute()
         {
@@ -101,6 +101,8 @@ namespace Wedency
             WedencyContract.Requires<Exception>(false);
         }
     }
+
+
 
     [System.AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     sealed public class NETMethodRewriteAttribute : Attribute
@@ -170,4 +172,5 @@ namespace Wedency
     {
 
     }
+
 }

@@ -6,15 +6,25 @@ param (
 )
 
 chcp 936
+$cD = (Get-Location).Path
 
+$parentDir = $cD | Split-Path -Parent
+
+$Pa = Join-Path $parentDir "AskedToPack.txt"
 $buildFile    = "Packing.txt"
 $buildingFile = "buildnumber.txt"
 
 # 确保文件存在
 if (-not (Test-Path $buildFile))    { "false" | Out-File $buildFile }
 if (-not (Test-Path $buildingFile)) { "0"     | Out-File $buildingFile }
+if (-not (Test-Path $Pa)) { "false"     | Out-File $Pa }
 
 function Increment-Build {
+    $ft = [string](Get-Content $Pa)
+    if($ft -ne "true")
+    {
+        exit 0;
+    }
     $num = [int](Get-Content $buildingFile)
     dotnet pack -c $Configuration -o $OfflinePackagesDir -p:PackageVersion=0.0.0.$num
     if ($LASTEXITCODE -ne 0) {

@@ -14,7 +14,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace WebGen.ASPNET
 {
-    internal class ASPNETConvertor:IProjConverter
+    [Obsolete("这个代码是我用来备忘用的，我怕我忘了")]
+    public class ASPNETConvertor:IPageConverter
     {
         internal void SetRequest(HttpRequest request)
         {
@@ -59,7 +60,5 @@ namespace WebGen.ASPNET
             return html.ToString();
             //return $"<!DOCTYPE html><html><head><style>{styles}</style></head><body>{htmlBody}</body><script>{js}</script></html>";
         }
-
     }
-
 }
