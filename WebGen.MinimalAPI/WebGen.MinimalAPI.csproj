@@ -16,8 +16,16 @@
   <ItemGroup>
     <AdditionalFiles Include="MainView.wxaml" />
   </ItemGroup>
-  <ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\WebGen.ASPNET\WebGen.ASPNET.csproj" />
+		<ProjectReference Include="..\WebGen.CodeGen\WebGen.CodeGen.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+	</ItemGroup>
+  <!--<ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <ProjectReference Include="..\WebGen.ASPNET\WebGen.ASPNET.csproj" />
     <ProjectReference Include="..\WebGen.CodeGen\WebGen.CodeGen.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+			<PackageReference Include="WebGen.ASPNET" />
+			<PackageReference Include="WebGen.CodeGen" />
+	</ItemGroup>-->
 </Project>

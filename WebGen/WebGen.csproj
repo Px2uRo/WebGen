@@ -41,7 +41,7 @@
 	</ItemGroup>
 
 	<!--生成和 pack 事件-->
-	<Target Name="PublishToOfflinePackages" AfterTargets="Build">
+	<!--<Target Name="PublishToOfflinePackages" AfterTargets="Build">
 		<MakeDir Directories="$(OfflinePackagesDir)" />
 		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High" />
 	</Target>
@@ -56,5 +56,5 @@
 		<Exec Command="chcp 936 &amp;&amp; powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -DirectSet false -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
 			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
 		</Exec>
-	</Target>
+	</Target>-->
 </Project>

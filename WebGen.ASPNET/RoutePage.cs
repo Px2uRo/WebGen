@@ -6,10 +6,10 @@ using WebGen.Controls;
 using WebGen.Converters.CSharp;
 using Wedency;
 
-namespace WebGen.ASPNET
+namespace WebGen.Controls
 {
     /// <summary>
-    /// 一个有 Route 的页面，仅在 WebGen.ASPNET 有这个 Control。运行时可访问 URL / {<see cref="Prefix"/>} 来查看该页面。
+    /// 一个有 Route 的页面，仅在 WebGen.ASPNET 有这个 Control。但是命名空间在 WebGen.Controls 下面，运行时可访问 URL / {<see cref="Prefix"/>} 来查看该页面。
     /// </summary>
     public class RoutePage : Control, IRoutable
     {

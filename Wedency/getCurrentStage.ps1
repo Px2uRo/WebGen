@@ -12,7 +12,7 @@ $parentDir = $cD | Split-Path -Parent
 
 $Pa = Join-Path $parentDir "AskedToPack.txt"
 $buildFile    = "Packing.txt"
-$buildingFile = "buildnumber.txt"
+$buildingFile = Join-Path $parentDir "unibuildnumber.txt"
 
 # 确保文件存在
 if (-not (Test-Path $buildFile))    { "false" | Out-File $buildFile }
@@ -34,8 +34,6 @@ function Increment-Build {
         "false" | Out-File $buildFile
         exit $LASTEXITCODE
     } 
-    $num++
-    $num | Out-File $buildingFile -Encoding UTF8
 }
 
 # 直接指定

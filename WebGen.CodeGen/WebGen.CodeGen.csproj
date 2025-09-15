@@ -22,23 +22,23 @@
 		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
-	<!-- 每次 build 后生成 NuGet 包到离线目录 -->
+	<!-- 每次 build 后生成 NuGet 包到离线目录 --><!--
 	<Target Name="PublishToOfflinePackages" AfterTargets="Build">
 		<MakeDir Directories="$(OfflinePackagesDir)" />
 		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High" />
 	</Target>
-	<!-- 每次 Pack 前递增版本号 -->
+	--><!-- 每次 Pack 前递增版本号 --><!--
 	<Target Name="IncrementVersion" BeforeTargets="Pack">
 		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -InputValue &quot;true&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
 			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
 		</Exec>
 	</Target>
-	<!--Pack 后设置 PS 脚本-->
+	--><!--Pack 后设置 PS 脚本--><!--
 	<Target Name="IncrementVersion" AfterTargets="Pack">
 		<Exec Command="powershell -NoProfile -File &quot;$(ProjectDir)getCurrentStage.ps1&quot; -DirectSet &quot;false&quot; -Configuration $(Configuration) -OfflinePackagesDir $(OfflinePackagesDir)" StandardOutputImportance="High">
 			<Output TaskParameter="ConsoleOutput" PropertyName="PACKING" />
 		</Exec>
-	</Target>
+	</Target>-->
 	<ItemGroup>
 		<None Remove="readme.md" />
 		<None Include="WebGen.CodeGen.png" Pack="True">

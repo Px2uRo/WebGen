@@ -41,11 +41,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 	ProjectSection(SolutionItems) = preProject
 		AskedToPack.txt = AskedToPack.txt
 		readme.md = readme.md
+		unibuildnumber.txt = unibuildnumber.txt
 	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedUnitTest", "SharedUnitTest\SharedUnitTest.shproj", "{5E08F936-512E-428D-80FE-78729E440545}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverTests", "WebDriverTests\WebDriverTests.csproj", "{0B5A6FCA-791A-4AEB-8BC3-130811D45736}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{349FCB03-6C47-4FC7-8D81-5CB4AE05989A}"
+	ProjectSection(SolutionItems) = preProject
+		PublishLibraries.ps1 = PublishLibraries.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,6 +149,7 @@ Global
 		{0BFD5AA9-4942-4DE9-B495-7B706CD439A8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{5E08F936-512E-428D-80FE-78729E440545} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{0B5A6FCA-791A-4AEB-8BC3-130811D45736} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{349FCB03-6C47-4FC7-8D81-5CB4AE05989A} = {9FA3D6BD-1EC1-3BA5-80CB-CE02773A58D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7A9455B-9061-48E5-AC51-FF02E32880E3}
