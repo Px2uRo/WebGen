@@ -33,16 +33,16 @@ namespace WebGen.ASPNET
         public void AddRoute(string pattern, RequestDelegate handler)
         {
             _routes[pattern] = handler;
-            RebuildEndpoints();
+            _rebuildEndpoints();
         }
 
         public void RemoveRoute(string pattern)
         {
             _routes.TryRemove(pattern, out _);
-            RebuildEndpoints();
+            _rebuildEndpoints();
         }
 
-        private void RebuildEndpoints()
+        private void _rebuildEndpoints()
         {
             var newEndpoints = new List<Endpoint>();
 
@@ -129,6 +129,14 @@ namespace WebGen.ASPNET
             res.Inner = inner;
             return res;
         }
-        public virtual void Run() => Inner?.Run();
+        public virtual void Run()
+        {
+            Inner?.UseRouting();
+            Inner?.UseEndpoints(endpoints =>
+            {
+                endpoints.DataSources.Add(_dynamicSource);
+            });
+            Inner?.Run();
+        }
     }
 }

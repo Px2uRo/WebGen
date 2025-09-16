@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using WebGen.ASPNET;
 
@@ -10,9 +11,6 @@ namespace WebGen.MinimalAPI
 #if true
             var builder = WebGenASPApplication.GetBuilder<App>(args);
             var app = builder.Build<App>(); 
-            var todosApi = app.Inner.MapGroup("/todos");
-            var index = app.Inner.MapGroup("index");
-            index.MapGet("/", (_) => { return new(() => { Results.Ok(); }); });
             app.UseASPNET().Run();  
 #endif
         }
@@ -24,5 +22,5 @@ namespace WebGen.MinimalAPI
     internal partial class AppJsonSerializerContext : JsonSerializerContext
     {
 
-    }
+    }       
 }

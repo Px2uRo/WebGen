@@ -1,7 +1,9 @@
 ﻿<RoutePage xmlns="https://github.com/Px2uRo/WebGen"
 		   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-		   x:Class="WebGen.MinimalAPI.MainView">
+		   x:Class="WebGen.MinimalAPI.MainView" Prefix="/">
 	<Grid>
-		<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Hello World!</TextBlock>
+		<TextBlock 
+			HorizontalAlignment="Center" 
+			VerticalAlignment="Center">Hello World!</TextBlock>
 	</Grid>
 </RoutePage>

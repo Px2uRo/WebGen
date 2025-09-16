@@ -13,8 +13,12 @@ namespace WebGen.Controls
     /// </summary>
     public class RoutePage : Control, IRoutable
     {
-        //TODO WedencyProperty<string> WedencyProperty = WedencyPropertyJS
-        public virtual string Pattern { get; set; }
+        // WedencyProperty<string> WedencyProperty = WedencyPropertyJS (逆天，哪有说直接让客户就把 Route 随便改了的)
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string Prefix { get; set; }
     }
 
     /// <summary>
@@ -26,6 +30,6 @@ namespace WebGen.Controls
         /// <summary>
         /// Route 名字
         /// </summary>
-        string Pattern { get; }
+        string Prefix { get; }
     }
 }
