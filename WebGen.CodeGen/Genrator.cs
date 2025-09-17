@@ -73,8 +73,6 @@ namespace WebGen.CodeGen
             return false;
         }
 
-
-
         public static bool HasInvocated(this InvocationExpressionSyntax invocation, string toDisplayString, SemanticModel semantic)
         {
 
@@ -99,11 +97,12 @@ namespace WebGen.CodeGen
             }
             return false;
         }
-
+        public static bool HasInvocated(this InvocationExpressionSyntax invocation, string toDisplayString, SemanticModel semantic, out string )
     }
     [Generator]
     public class WXAMLGenerator : ISourceGenerator
     {
+        public string ConvertorClassName { get; set; } = "WebGen.Converters.RuntimeConverterDemo";
         public bool UseASPNET { get; set; } = false;
         public void Initialize(GeneratorInitializationContext context)
         {
@@ -129,6 +128,13 @@ namespace WebGen.CodeGen
                         NamespaceDeclarationSyntax @namespace = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(namespaceName)).NormalizeWhitespace();
 
                         string overridedRun = "{";
+                        //读下标签
+                        //var attrs = classDecl.AttributeLists.SelectMany(al => al.Attributes);
+                        //foreach (var item in attrs)
+                        //{
+                            
+                        //}
+                        //算了我还是一样的读函数调用吧。
                         foreach (var item in MinimalAPIExpressions)
                         {
                             overridedRun += item.ToFullString();
@@ -250,10 +256,11 @@ namespace WebGen.CodeGen
                         }
                         else
                         {
+
                             var text = @"this.DynamicSource.AddRoute(""" + pref + @""", async context =>
             {
-                context.Response.ContentType = ""application/json"";
-                await context.Response.WriteAsync(""{}"");
+                context.Response.ContentType = ""text\html"";
+                await context.Response.WriteAsync("""+ metadata + @""");
             });";
                             MinimalAPIExpressions.Add((InvocationExpressionSyntax)SyntaxFactory.ParseExpression(
                                 text));
