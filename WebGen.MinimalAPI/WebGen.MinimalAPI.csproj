@@ -19,6 +19,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\WebGen.ASPNET\WebGen.ASPNET.csproj" />
 		<ProjectReference Include="..\WebGen.CodeGen\WebGen.CodeGen.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\Wedency\Wedency.csproj" />
 	</ItemGroup>
   <!--<ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <ProjectReference Include="..\WebGen.ASPNET\WebGen.ASPNET.csproj" />

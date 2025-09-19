@@ -97,7 +97,7 @@ namespace WebGen.CodeGen
             }
             return false;
         }
-        public static bool HasInvocated(this InvocationExpressionSyntax invocation, string toDisplayString, SemanticModel semantic, out string )
+
     }
     [Generator]
     public class WXAMLGenerator : ISourceGenerator
@@ -175,7 +175,6 @@ namespace WebGen.CodeGen
 
                     }
                 }
-
             }
         }
 
@@ -202,6 +201,10 @@ namespace WebGen.CodeGen
                 if (root.NamespaceURI == "https://github.com/Px2uRo/WebGen")
                 {
                     baseClass = "WebGen.Controls." + root.Name;
+                }
+                else
+                {
+                    continue; // 不是我们的 wxaml
                 }
 
                 string classFullName = root.GetAttribute("Class", "http://schemas.microsoft.com/winfx/2006/xaml");
@@ -232,36 +235,107 @@ namespace WebGen.CodeGen
             });
 
                      */
-                    if(baseClass.ToString() == "WebGen.Controls.RoutePage" && root.GetAttribute("Prefix") is string pref)
+                    if(baseClass == "WebGen.Controls.RoutePage" && root.GetAttribute("Prefix") is string pref)
                     {
-                        if (string.IsNullOrWhiteSpace(root.GetAttribute("Prefix")))
+                        ClassDeclarationSyntax controlClass = null;
+                        var syntrees = context.Compilation.SyntaxTrees;
+                        foreach (var tree in syntrees)
                         {
-                            var syntaxReceiver = (ClassDeclarationReceiver)context.SyntaxReceiver;
-                            foreach (var classDecl in syntaxReceiver.Candidates)
+                            foreach (var classDecl1 in tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>())
                             {
-                                if (classDecl.GetFullName() == classFullName)
+                                if (classDecl1.GetFullName() == classFullName)
                                 {
-                                    var location = classDecl.GetLocation().GetLineSpan();
-                                    var lineNumber = location.StartLinePosition.Line + 1;
-                                    var filePath = location.Path;
-
-                                    // TODO 给编译器报一个提示，展示行号
-                                    context.ReportDiagnostic(Diagnostic.Create(
-                                        new DiagnosticDescriptor("WGN001", "需要 Prefix。",
-                                            $"类 {classDecl.Identifier.Text} 在 {filePath}:{lineNumber}",
-                                            "SourceGen", DiagnosticSeverity.Info, true),
-                                        classDecl.GetLocation()));
+                                    controlClass = classDecl1;
+                                    break;
                                 }
                             }
                         }
+
+                        if (string.IsNullOrWhiteSpace(root.GetAttribute("Prefix")))
+                        {
+                            var location = controlClass.GetLocation().GetLineSpan();
+                            var lineNumber = location.StartLinePosition.Line + 1;
+                            var filePath = location.Path;
+                            // TODO 给编译器报一个提示，展示行号
+                            context.ReportDiagnostic(Diagnostic.Create(
+                                new DiagnosticDescriptor("WGN001", "需要 Prefix。",
+                                    $"类 {controlClass.Identifier.Text} 在 {filePath}:{lineNumber}",
+                                    "SourceGen", DiagnosticSeverity.Info, true),
+                                controlClass.GetLocation()));
+                        }
                         else
                         {
+                            var xamlMetaData = "";
+                            var csMetaData = ""; 
+                            using (var ms = new MemoryStream()) {
+                            using (var sb = new StreamWriter(ms))
+                            {
+                                // 写 wxaml
+                                sb.Write(wxaml);
+                                sb.Flush();
+                                ms.Position = 0;
+                                xamlMetaData = Convert.ToBase64String(ms.ToArray());
 
+                                // 清空流（不能用 GetStringBuilder，因为这是 StreamWriter）
+                                ms.SetLength(0);   // 直接清空 MemoryStream
+                                sb.Flush();
+
+                                // 写 controlClass
+                                sb.Write(controlClass.ToFullString());
+                                sb.Flush();
+                                ms.Position = 0;
+                                csMetaData = Convert.ToBase64String(ms.ToArray());
+                            }
+                            }
+
+
+                            myClass = myClass.AddMembers(
+    SyntaxFactory.FieldDeclaration(
+    SyntaxFactory.VariableDeclaration(
+        SyntaxFactory.PredefinedType(
+            SyntaxFactory.Token(
+                SyntaxKind.StringKeyword)))
+    .WithVariables(
+        SyntaxFactory.SingletonSeparatedList(
+                    SyntaxFactory.VariableDeclarator(
+                        SyntaxFactory.Identifier("_xamlMetaData"))
+                    .WithInitializer(
+                        SyntaxFactory.EqualsValueClause(
+                            SyntaxFactory.LiteralExpression(
+                                SyntaxKind.StringLiteralExpression,
+                                SyntaxFactory.Literal(xamlMetaData))
+                            )))
+        )).WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.InternalKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)
+        )))
+                            .AddMembers(
+    SyntaxFactory.FieldDeclaration(
+    SyntaxFactory.VariableDeclaration(
+        SyntaxFactory.PredefinedType(
+            SyntaxFactory.Token(
+                SyntaxKind.StringKeyword)))
+    .WithVariables(
+        SyntaxFactory.SingletonSeparatedList(
+                    SyntaxFactory.VariableDeclarator(
+                        SyntaxFactory.Identifier("_csMetaData"))
+                    .WithInitializer(
+                        SyntaxFactory.EqualsValueClause(
+                            SyntaxFactory.LiteralExpression(
+                                SyntaxKind.StringLiteralExpression,
+                                SyntaxFactory.Literal(csMetaData))))))).WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.InternalKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))))
+        .WithModifiers(
+            SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword),
+                SyntaxFactory.Token(SyntaxKind.PartialKeyword)));
+
+                            var acl = controlClass.GetFullName();
+                            var xar = $"{acl}._xamlMetaData";
+                            var car = $"{acl}._csMetaData";
                             var text = @"this.DynamicSource.AddRoute(""" + pref + @""", async context =>
             {
-                context.Response.ContentType = ""text\html"";
-                await context.Response.WriteAsync("""+ metadata + @""");
-            });";
+                context.Response.ContentType = ""text/html"";
+                byte[] xbytes = Convert.FromBase64String(" + xar + @");" + @"
+                byte[] cbytes = Convert.FromBase64String(" + car + @");" + @"
+                await context.Response.WriteAsync(this.Converter.Convert(System.Text.Encoding.UTF8.GetString(xbytes),System.Text.Encoding.UTF8.GetString(cbytes)));
+            });";//$""{" + $"" + @"}""
                             MinimalAPIExpressions.Add((InvocationExpressionSyntax)SyntaxFactory.ParseExpression(
                                 text));
                         }

@@ -6,7 +6,10 @@ namespace WebGen.MinimalAPI
 {
     public partial class App : WebGenASPApplication
     {
+        public App()
+        {
 
+        }
     }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Wedency;
+using WebGen.Converters;
 
 namespace WebGen.Controls
 {
@@ -11,6 +12,7 @@ namespace WebGen.Controls
     [WebGenBase]
     public class WebGenApplication//: IGlobalDataTemplates //TODO 不知道怎么用
     {
+        public IPageConverter Converter { get; private set; } = new RuntimeConverterDemo();
         public WebGenApplication Current { get; protected set; }
     }
 }
